@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maré · largue o vício, um dia de cada vez</title>
+<meta name="description" content="O Maré te ajuda a largar pornografia, scroll ou álcool. Um coach que te escuta na hora difícil, seus dias limpos contados sem punição e o lembrete do seu porquê. Sem julgamento. 7 dias grátis." />
+<meta name="theme-color" content="#05070d" />
+
+<!-- Open Graph · TROQUE a base de URL pelo domínio real de deploy -->
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:site_name" content="Maré" />
+<meta property="og:url" content="https://josediogor.github.io/mare-site/" />
+<meta property="og:title" content="Maré · largue o vício, um dia de cada vez" />
+<meta property="og:description" content="Largue o vício, um dia de cada vez. Um coach que te escuta, seus dias limpos contados sem punição e o lembrete do seu porquê na hora difícil. Sem julgamento." />
+<meta property="og:image" content="https://josediogor.github.io/mare-site/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Maré · largue o vício, um dia de cada vez" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Maré · largue o vício, um dia de cada vez" />
+<meta name="twitter:description" content="Largue o vício, um dia de cada vez. Coach que te escuta, dias limpos contados sem punição e o seu porquê sempre à mão. Sem julgamento." />
+<meta name="twitter:image" content="https://josediogor.github.io/mare-site/assets/og.jpg" />
+
+<link rel="icon" type="image/png" href="assets/icon.png" />
+<link rel="apple-touch-icon" href="assets/icon.png" />
+<link rel="preload" as="image" href="assets/shots/jornada.png" fetchpriority="high" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   MARÉ · landing
+   deep ocean at night · bioluminescent gradient wave
+   cores/tokens derivados de app/lib/theme.ts
+   (display: Hanken Grotesk realiza a intenção "tight grotesk" do app;
+    o app usa Inter só porque Inter Tight não existe no @expo-google-fonts)
+   ============================================================ */
+
+:root{
+  --bg0:#05070d; --bg1:#0a0d18; --bg2:#0e1322; --surface:#0e1220;
+  --ink:#f4f3ee; --ink2:#c7c8d1; --ink3:#8b8fa3; --ink4:#7e8499;
+  --violet:#7c5cff; --violet2:#b39dff; --violet-deep:#4b3b9a;
+  --cyan:#2dd4d8; --coral:#ff8a5c; --azure:#4d8fff; --green:#6dd49d; --amber:#e9b665; --rose:#ff5c8a;
+  --line:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.13);
+
+  --wave:linear-gradient(90deg,#2dd4d8 0%,#4d8fff 38%,#7c5cff 68%,#ff5c8a 100%);
+  --wave-soft:linear-gradient(90deg,#2dd4d8,#7c5cff);
+
+  --f-display:"Hanken Grotesk",-apple-system,system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,monospace;
+  --f-hand:"Caveat",cursive;
+
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+body{
+  font-family:var(--f-display);
+  background:var(--bg0);
+  color:var(--ink);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* ---- ambient field: deep-water bioluminescence ---- */
+.field{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
+.field::before{
+  content:"";position:absolute;inset:-20%;
+  background:
+    radial-gradient(46% 38% at 78% 8%, rgba(45,212,216,.16), transparent 70%),
+    radial-gradient(50% 42% at 12% 30%, rgba(124,92,255,.20), transparent 72%),
+    radial-gradient(60% 50% at 88% 72%, rgba(75,59,154,.22), transparent 75%),
+    radial-gradient(46% 44% at 30% 96%, rgba(255,92,138,.10), transparent 72%);
+  filter:saturate(120%);
+}
+/* grain */
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+::selection{background:rgba(124,92,255,.4);color:#fff}
+
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+
+/* ---------- shared type ---------- */
+.eyebrow{
+  font-family:var(--f-mono);font-size:.72rem;font-weight:500;
+  letter-spacing:.34em;text-transform:uppercase;color:var(--ink3);
+  display:inline-flex;align-items:center;gap:.7em;
+}
+.eyebrow::before{content:"";width:36px;height:2px;border-radius:2px;background:var(--wave)}
+.grad{background:var(--wave);-webkit-background-clip:text;background-clip:text;color:transparent;}
+h1,h2,h3{font-weight:800;letter-spacing:-.03em;line-height:1.02}
+.hand{font-family:var(--f-hand);font-weight:500;letter-spacing:0}
+
+section{position:relative}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--f-display);font-weight:700;font-size:1rem;letter-spacing:-.01em;
+  padding:15px 24px;border-radius:16px;border:1px solid transparent;
+  cursor:pointer;transition:transform .25s var(--ease),box-shadow .35s var(--ease),background .3s;
+  will-change:transform;
+}
+.btn-app{
+  background:linear-gradient(180deg,#fbfaf6,#e9e8e1);color:#0a0d18;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 18px 44px -14px rgba(124,92,255,.55),0 2px 8px rgba(0,0,0,.4);
+}
+.btn-app:hover{transform:translateY(-3px);box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 26px 60px -14px rgba(124,92,255,.7),0 4px 12px rgba(0,0,0,.5)}
+.btn-app .apple{width:20px;height:20px;fill:#0a0d18;margin-top:-2px}
+.btn-app small{display:block;font-family:var(--f-mono);font-size:.6rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;opacity:.62;line-height:1;margin-bottom:2px}
+.btn-app b{font-weight:800;font-size:1.02rem;letter-spacing:-.02em;line-height:1}
+.btn-ghost{background:rgba(255,255,255,.03);border-color:var(--line-2);color:var(--ink);backdrop-filter:blur(8px)}
+.btn-ghost:hover{background:rgba(255,255,255,.07);transform:translateY(-2px)}
+.btn-soon{background:rgba(255,255,255,.025);border:1px dashed var(--line-2);color:var(--ink2);cursor:default;-webkit-user-select:none;user-select:none}
+.btn-soon:hover{transform:none;box-shadow:none}
+.btn-soon .android{width:21px;height:21px;fill:var(--ink3);margin-top:-1px}
+.btn-soon small{display:block;font-family:var(--f-mono);font-size:.6rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;opacity:.75;line-height:1;margin-bottom:2px}
+.btn-soon b{font-weight:800;font-size:1.02rem;letter-spacing:-.02em;line-height:1;color:var(--ink2)}
+
+.tcol{display:flex;flex-direction:column;gap:5px;text-align:left}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .4s,backdrop-filter .4s,border-color .4s;
+  border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(5,7,13,.72);backdrop-filter:blur(18px) saturate(140%);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.28rem;letter-spacing:-.04em}
+.brand img{width:30px;height:30px;border-radius:9px;box-shadow:0 4px 14px rgba(124,92,255,.4)}
+.brand .wave-u{display:block;width:34px;height:6px;margin-top:-3px}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{font-size:.92rem;color:var(--ink2);font-weight:500;transition:color .2s;position:relative}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;height:1px;width:0;background:var(--wave-soft);transition:width .3s var(--ease)}
+.nav-links a:hover::after{width:100%}
+.nav-links a.nav-cta{padding:10px 18px;border-radius:12px;background:var(--ink);color:#0a0d18;font-weight:700;font-size:.9rem;transition:transform .2s,box-shadow .3s}
+.nav-links a.nav-cta:hover{color:#0a0d18;transform:translateY(-2px);box-shadow:0 10px 28px -8px rgba(244,243,238,.5)}
+.nav-links a.nav-cta::after{display:none}
+@media(max-width:860px){.nav-links a:not(.nav-cta){display:none}}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{padding:148px 0 60px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.hero-copy{max-width:560px}
+.hero h1{font-size:clamp(2.7rem,6.4vw,4.7rem);font-weight:800;margin:26px 0 0}
+.hero h1 .l2{display:block}
+.hero .sub{font-size:clamp(1.05rem,1.8vw,1.27rem);color:var(--ink2);margin-top:24px;max-width:30em;line-height:1.5;font-weight:400}
+.hero .sub b{color:var(--ink);font-weight:600}
+.cta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:34px}
+.trust{display:flex;align-items:center;gap:14px;margin-top:22px;flex-wrap:wrap;
+  font-family:var(--f-mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
+.trust .dot{width:4px;height:4px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+
+/* hero phones */
+.hero-stage{position:relative;height:600px;display:flex;align-items:center;justify-content:center}
+.glow{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;z-index:0}
+.hero-stage .glow{width:420px;height:520px;background:
+  radial-gradient(circle at 50% 40%,rgba(124,92,255,.5),transparent 62%),
+  radial-gradient(circle at 60% 75%,rgba(45,212,216,.35),transparent 60%);opacity:.85}
+.phone-pair{position:relative;z-index:2}
+.phone-pair .phone.back{position:absolute;top:-44px;right:-106px;width:188px;z-index:1;opacity:.82;transform:rotate(4deg)}
+.phone-pair .phone.front{width:274px;position:relative;z-index:2}
+
+/* floating animation */
+@keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes float2{0%,100%{transform:translateY(0) rotate(4deg)}50%{transform:translateY(-22px) rotate(4deg)}}
+.phone-pair .front{animation:float1 7s var(--ease) infinite}
+.phone-pair .back{animation:float2 8.5s var(--ease) infinite}
+@media (prefers-reduced-motion:reduce){.phone-pair .front,.phone-pair .back{animation:none}}
+
+/* ============================================================
+   DEVICE FRAME (real screenshots)
+   ============================================================ */
+.phone{
+  --st:#0a0d18;
+  position:relative;border-radius:14% / 6.6%;
+  padding:2.4%;
+  background:linear-gradient(150deg,#23262f,#0c0d12 38%,#1a1c24 72%,#06070b);
+  box-shadow:
+    0 2px 2px rgba(255,255,255,.10) inset,
+    0 -1px 3px rgba(0,0,0,.6) inset,
+    0 50px 90px -34px rgba(0,0,0,.85),
+    0 18px 40px -20px rgba(124,92,255,.4);
+}
+.phone .screen{position:relative;border-radius:11% / 5.2%;overflow:hidden;background:var(--st);
+  box-shadow:0 0 0 1.5px rgba(0,0,0,.7),0 0 0 2.5px rgba(255,255,255,.04)}
+.phone .screen>img{width:100%;height:auto;aspect-ratio:820/1782;display:block}
+/* clean status bar overlay → masks TestFlight bar of the raw capture */
+.phone .statusbar{position:absolute;top:0;left:0;right:0;height:7%;z-index:3;
+  background:var(--st);display:flex;align-items:center;justify-content:space-between;
+  padding:0 8% 0 7.5%;}
+.phone .statusbar .time{font-family:var(--f-display);font-weight:700;font-size:clamp(9px,3.7cqw,15px);color:#fff;letter-spacing:-.02em}
+.phone .statusbar .sys{display:flex;align-items:center;gap:5.5px}
+.phone .statusbar svg{height:clamp(8px,3.4cqw,13px);width:auto;fill:#fff;display:block}
+.phone .island{position:absolute;top:2%;left:50%;transform:translateX(-50%);
+  width:30%;height:3.1%;background:#000;border-radius:999px;z-index:4;
+  box-shadow:0 0 0 1px rgba(0,0,0,.6)}
+/* screen sheen */
+.phone .screen::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;
+  background:linear-gradient(118deg,rgba(255,255,255,.10) 0%,transparent 18%,transparent 82%,rgba(255,255,255,.04) 100%);}
+.phone{container-type:inline-size}
+
+/* ============================================================
+   logos / trust strip
+   ============================================================ */
+.marq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0;margin-top:46px}
+.marq .wrap{display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap}
+.marq .item{display:flex;align-items:center;gap:11px;color:var(--ink3);font-size:.86rem;font-weight:500}
+.marq .item svg{width:19px;height:19px;stroke:var(--cyan);fill:none;stroke-width:1.6;opacity:.9}
+.marq .item b{color:var(--ink2);font-weight:700}
+
+/* ============================================================
+   MANIFESTO
+   ============================================================ */
+.manifesto{padding:130px 0 90px;text-align:center}
+.manifesto .big{font-size:clamp(1.9rem,4.4vw,3.25rem);font-weight:800;letter-spacing:-.035em;line-height:1.12;max-width:18ch;margin:22px auto 0}
+.manifesto p{color:var(--ink2);max-width:46ch;margin:30px auto 0;font-size:1.1rem;line-height:1.6}
+.manifesto .cyc{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:40px;flex-wrap:wrap;
+  font-family:var(--f-mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3)}
+.manifesto .cyc span{padding:7px 14px;border:1px solid var(--line-2);border-radius:999px;background:rgba(255,255,255,.02)}
+.manifesto .cyc .arr{border:none;color:var(--violet2);padding:0 2px}
+
+/* ============================================================
+   FEATURE SECTIONS
+   ============================================================ */
+.feat{padding:88px 0}
+.feat .wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.feat.rev .ftext{order:2}
+.feat.rev .fmedia{order:1}
+.ftext{max-width:480px}
+.feat.rev .ftext{margin-left:auto}
+.ftext h2{font-size:clamp(2rem,3.9vw,3rem);margin:20px 0 0}
+.ftext .lead{color:var(--ink2);font-size:1.13rem;line-height:1.62;margin-top:20px}
+.flist{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:14px}
+.flist li{display:flex;gap:13px;align-items:flex-start;color:var(--ink2);font-size:1rem;line-height:1.45}
+.flist li svg{width:20px;height:20px;flex:0 0 20px;margin-top:2px;stroke-width:1.7;fill:none}
+.flist li b{color:var(--ink);font-weight:600}
+
+.fmedia{position:relative;display:flex;align-items:center;justify-content:center}
+.fmedia .phone{width:288px;max-width:78%;position:relative;z-index:2}
+.fmedia .glow{width:380px;height:440px;opacity:.6}
+
+/* voice quote (registro companheiro) */
+.vquote{margin-top:28px;padding:18px 22px;border-left:2px solid;border-image:var(--wave) 1;
+  background:linear-gradient(90deg,rgba(124,92,255,.07),transparent);border-radius:0 12px 12px 0}
+.vquote .hand{font-size:1.65rem;font-weight:600;color:var(--ink);line-height:1.18;text-shadow:0 1px 10px rgba(124,92,255,.25)}
+.vquote cite{display:block;margin-top:6px;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);font-style:normal}
+
+/* ============================================================
+   PRIVACY
+   ============================================================ */
+.privacy{padding:96px 0;position:relative}
+.privacy .wrap{max-width:1000px}
+.privacy .head{text-align:center;max-width:38ch;margin:0 auto}
+.privacy h2{font-size:clamp(2rem,4.4vw,3.1rem);margin-top:18px}
+.privacy h2 em{font-style:normal}
+.privacy .sub{color:var(--ink2);margin-top:18px;font-size:1.1rem}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:54px}
+.pcard{padding:26px 22px;border:1px solid var(--line);border-radius:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
+  transition:transform .35s var(--ease),border-color .35s,background .35s}
+.pcard:hover{transform:translateY(-6px);border-color:var(--line-2);background:linear-gradient(180deg,rgba(124,92,255,.08),rgba(255,255,255,.01))}
+.pcard .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;margin-bottom:16px;
+  background:radial-gradient(circle at 35% 25%,rgba(45,212,216,.22),rgba(124,92,255,.14));border:1px solid var(--line-2)}
+.pcard .ic svg{width:23px;height:23px;stroke:var(--cyan);fill:none;stroke-width:1.6}
+.pcard h3{font-size:1.06rem;letter-spacing:-.02em;font-weight:700}
+.pcard p{color:var(--ink3);font-size:.9rem;margin-top:7px;line-height:1.45}
+
+/* ============================================================
+   STEPS
+   ============================================================ */
+.steps{padding:96px 0}
+.steps .head{text-align:center;margin-bottom:18px}
+.steps h2{font-size:clamp(2rem,4.2vw,3rem);margin-top:14px}
+.steps-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;margin-top:30px}
+.step{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:none}
+.step .n{font-family:var(--f-mono);font-size:.95rem;font-weight:700;color:var(--bg0);
+  width:38px;height:38px;flex:0 0 38px;border-radius:11px;display:grid;place-items:center;
+  background:var(--wave);box-shadow:0 8px 20px -8px rgba(124,92,255,.7)}
+.step h3{font-size:1.22rem;letter-spacing:-.02em}
+.step p{color:var(--ink3);margin-top:6px;font-size:.98rem;line-height:1.5}
+.steps-grid .fmedia .phone{width:270px}
+
+/* ============================================================
+   MILESTONES
+   ============================================================ */
+.miles{padding:70px 0 100px;text-align:center}
+.miles h2{font-size:clamp(1.7rem,3.6vw,2.5rem);margin-top:14px}
+.miles p{color:var(--ink2);max-width:42ch;margin:16px auto 0}
+.mtrack{position:relative;margin:60px auto 0;max-width:920px}
+.mline{position:absolute;top:21px;left:5%;right:5%;height:2px;background:var(--wave);opacity:.55;border-radius:2px}
+.mdots{display:flex;justify-content:space-between;position:relative;z-index:2}
+.mdot{display:flex;flex-direction:column;align-items:center;gap:14px;flex:1}
+.mdot .pt{width:18px;height:18px;border-radius:50%;background:var(--bg0);border:2px solid var(--violet2);
+  box-shadow:0 0 0 4px rgba(124,92,255,.12),0 0 14px rgba(124,92,255,.5)}
+.mdot .lab{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.06em;color:var(--ink2)}
+.mdot .lab b{display:block;color:var(--ink);font-size:1.15rem;font-family:var(--f-display);font-weight:800;letter-spacing:-.02em}
+.mdot:nth-child(1) .pt{border-color:var(--cyan)}
+.mdot:nth-child(2) .pt{border-color:var(--azure)}
+.mdot:nth-child(3) .pt{border-color:#518aff}
+.mdot:nth-child(4) .pt{border-color:#6e6bff}
+.mdot:nth-child(5) .pt{border-color:#a45cdb}
+.mdot:nth-child(6) .pt{border-color:var(--rose)}
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.pricing{padding:96px 0}
+.pricing .head{text-align:center;max-width:40ch;margin:0 auto 14px}
+.pricing h2{font-size:clamp(2rem,4.4vw,3.1rem);margin-top:16px}
+.pricing .sub{color:var(--ink2);margin-top:16px;font-size:1.08rem}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px;align-items:stretch}
+.plan{position:relative;display:flex;flex-direction:column;padding:32px 28px;border-radius:22px;
+  border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008));
+  transition:transform .35s var(--ease),border-color .35s}
+.plan:hover{transform:translateY(-6px);border-color:var(--line-2)}
+.plan.best{border-color:transparent;background:
+  linear-gradient(180deg,rgba(124,92,255,.14),rgba(45,212,216,.05)),var(--bg1);
+  box-shadow:0 30px 70px -30px rgba(124,92,255,.6)}
+.plan.best::before{content:"";position:absolute;inset:0;border-radius:22px;padding:1px;z-index:0;
+  background:var(--wave);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude}
+.plan>*{position:relative;z-index:1}
+.badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  font-family:var(--f-mono);font-size:.64rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:6px 14px;border-radius:999px;background:var(--wave);color:var(--bg0);white-space:nowrap;
+  box-shadow:0 8px 20px -8px rgba(124,92,255,.8)}
+.plan .pname{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
+.plan .price{font-size:2.7rem;font-weight:800;letter-spacing:-.04em;margin-top:14px;line-height:1}
+.plan .price small{font-size:.95rem;color:var(--ink3);font-weight:500;letter-spacing:0}
+.plan .per{color:var(--ink3);font-size:.9rem;margin-top:8px;min-height:2.4em}
+.plan .per b{color:var(--cyan);font-weight:700}
+.plan ul{list-style:none;margin:22px 0 26px;display:flex;flex-direction:column;gap:11px;flex:1}
+.plan ul li{display:flex;gap:10px;align-items:flex-start;font-size:.93rem;color:var(--ink2);line-height:1.4}
+.plan ul li svg{width:17px;height:17px;flex:0 0 17px;margin-top:2px;stroke:var(--green);fill:none;stroke-width:2}
+.plan .pcta{display:flex;justify-content:center;text-align:center;padding:14px;border-radius:14px;font-weight:700;
+  border:1px solid var(--line-2);background:rgba(255,255,255,.04);transition:transform .2s,background .3s}
+.plan .pcta:hover{transform:translateY(-2px);background:rgba(255,255,255,.09)}
+.plan.best .pcta{background:linear-gradient(180deg,#fbfaf6,#e9e8e1);color:var(--bg0);border-color:transparent}
+.pricing .fineprint{text-align:center;color:var(--ink4);font-size:.8rem;margin-top:30px;max-width:60ch;margin-left:auto;margin-right:auto;line-height:1.5}
+
+/* ============================================================
+   SAFETY
+   ============================================================ */
+.safety{padding:64px 0 96px}
+.safety .wrap{max-width:760px}
+.scard{padding:36px 38px;border-radius:22px;border:1px solid var(--line);
+  background:linear-gradient(135deg,rgba(255,138,92,.06),rgba(14,18,32,.6));display:flex;gap:24px;align-items:flex-start}
+.scard .anchor{flex:0 0 52px;width:52px;height:52px;border-radius:15px;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 25%,rgba(255,138,92,.25),rgba(255,92,138,.12));border:1px solid var(--line-2)}
+.scard .anchor svg{width:26px;height:26px;stroke:var(--coral);fill:none;stroke-width:1.6}
+.scard h3{font-size:1.3rem;letter-spacing:-.02em;font-weight:700}
+.scard p{color:var(--ink2);margin-top:10px;line-height:1.6;font-size:1rem}
+.scard p b{color:var(--ink)}
+.scard .cvv{display:inline-flex;align-items:center;gap:9px;margin-top:16px;padding:10px 16px;border-radius:12px;
+  background:rgba(255,255,255,.04);border:1px solid var(--line-2);font-family:var(--f-mono);font-size:.82rem;letter-spacing:.04em;color:var(--ink)}
+.scard .cvv b{color:var(--coral)}
+
+/* ============================================================
+   FUNCTIONS GRID
+   ============================================================ */
+.funcs{padding:40px 0 92px}
+.funcs .head{text-align:center;max-width:44ch;margin:0 auto}
+.funcs h2{font-size:clamp(2rem,4.4vw,3.1rem);margin-top:16px}
+.funcs .sub{color:var(--ink2);margin-top:16px;font-size:1.08rem}
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:50px}
+.fcard{padding:28px 26px;border:1px solid var(--line);border-radius:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
+  transition:transform .35s var(--ease),border-color .35s,background .35s}
+.fcard:hover{transform:translateY(-6px);border-color:var(--line-2);background:linear-gradient(180deg,rgba(124,92,255,.08),rgba(255,255,255,.01))}
+.fcard .ic{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;margin-bottom:16px;
+  background:radial-gradient(circle at 35% 25%,rgba(45,212,216,.20),rgba(124,92,255,.14));border:1px solid var(--line-2)}
+.fcard .ic svg{width:24px;height:24px;fill:none;stroke-width:1.6}
+.fcard h3{font-size:1.14rem;letter-spacing:-.02em;font-weight:700}
+.fcard p{color:var(--ink3);font-size:.95rem;margin-top:8px;line-height:1.5}
+@media(max-width:920px){.fgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.fgrid{grid-template-columns:1fr;max-width:380px;margin-left:auto;margin-right:auto}}
+
+/* skip link */
+.skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--ink);color:var(--bg0);
+  padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;font-size:.9rem}
+.skip:focus{left:0}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq{padding:70px 0 100px}
+.faq .wrap{max-width:780px}
+.faq .head{text-align:center;margin-bottom:42px}
+.faq h2{font-size:clamp(1.9rem,4vw,2.7rem);margin-top:12px}
+.qa{border-bottom:1px solid var(--line)}
+.qa button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:24px 6px;background:none;border:none;cursor:pointer;text-align:left;
+  font-family:var(--f-display);font-size:1.12rem;font-weight:600;color:var(--ink);letter-spacing:-.02em}
+.qa button:hover{color:var(--violet2)}
+.qa .ic{flex:0 0 24px;width:24px;height:24px;position:relative;transition:transform .35s var(--ease)}
+.qa .ic::before,.qa .ic::after{content:"";position:absolute;background:var(--violet2);border-radius:2px;
+  top:50%;left:50%;transform:translate(-50%,-50%)}
+.qa .ic::before{width:14px;height:2px}
+.qa .ic::after{width:2px;height:14px;transition:transform .35s var(--ease)}
+.qa.open .ic::after{transform:translate(-50%,-50%) scaleY(0)}
+.qa .ans{max-height:0;overflow:hidden;transition:max-height .45s var(--ease)}
+.qa .ans p{color:var(--ink2);padding:0 6px 26px;line-height:1.65;font-size:1rem;max-width:62ch}
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.final{padding:120px 0;text-align:center;position:relative;overflow:hidden}
+.final .glow{width:min(760px,90vw);height:420px;left:50%;top:50%;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(124,92,255,.35),transparent 60%);opacity:.7}
+.final .eyebrow{justify-content:center}
+.final h2{font-size:clamp(2.4rem,6vw,4.4rem);margin:24px auto 0;max-width:16ch;letter-spacing:-.04em}
+.final p{color:var(--ink2);max-width:40ch;margin:24px auto 0;font-size:1.12rem}
+.final .cta-row{justify-content:center;margin-top:38px}
+.final .wave-big{margin:48px auto 0;max-width:520px;width:90%}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{border-top:1px solid var(--line);padding:60px 0 50px}
+.foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.foot-brand{max-width:300px}
+.foot-brand .brand{margin-bottom:16px}
+.foot-brand p{color:var(--ink3);font-size:.9rem;line-height:1.6}
+.foot-cols{display:flex;gap:64px;flex-wrap:wrap}
+.fcol h4{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink4);margin-bottom:16px}
+.fcol a{display:block;color:var(--ink2);font-size:.92rem;margin-bottom:11px;transition:color .2s}
+.fcol a:hover{color:var(--ink)}
+.foot-base{margin-top:52px;padding-top:26px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;
+  color:var(--ink4);font-size:.82rem}
+.foot-base .made{display:flex;align-items:center;gap:8px}
+
+/* ============================================================
+   REVEAL animations
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+.reveal.d4{transition-delay:.32s}.reveal.d5{transition-delay:.40s}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none}}
+
+/* wave-draw */
+.wdraw path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s var(--ease-out) .2s}
+.wdraw.in path{stroke-dashoffset:0}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr;gap:10px;text-align:center}
+  .hero-copy{max-width:none;margin:0 auto}
+  .eyebrow,.cta-row,.trust{justify-content:center}
+  .hero-stage{height:540px;margin-top:20px}
+  .feat .wrap{grid-template-columns:1fr;gap:38px}
+  .feat.rev .ftext,.feat.rev .fmedia{order:0}
+  .ftext{margin:0 auto!important;text-align:center}
+  .eyebrow{justify-content:center}
+  .flist{text-align:left;max-width:380px;margin-left:auto;margin-right:auto}
+  .vquote{text-align:left}
+  .pgrid{grid-template-columns:repeat(2,1fr)}
+  .steps-grid{grid-template-columns:1fr;gap:36px}
+  .steps-grid .fmedia{order:-1}
+  .plans{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}
+  .plan.best{order:-1}
+}
+@media(max-width:560px){
+  .wrap{padding:0 18px}
+  .hero{padding:120px 0 40px}
+  .pgrid{grid-template-columns:1fr 1fr;gap:12px}
+  .pcard{padding:20px 16px}
+  .mdot .lab{font-size:.62rem}
+  .mdot .lab b{font-size:.92rem}
+  .scard{flex-direction:column;padding:26px 22px}
+  .marq .wrap{justify-content:center}
+  .btn{font-size:.94rem;padding:14px 20px}
+}
+</style>
+</head>
+<body>
+
+<div class="field"></div>
+<div class="grain"></div>
+
+<!-- ===== reusable defs (gradients) ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="wg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2dd4d8"/><stop offset=".4" stop-color="#4d8fff"/>
+      <stop offset=".7" stop-color="#7c5cff"/><stop offset="1" stop-color="#ff5c8a"/>
+    </linearGradient>
+    <filter id="wglow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+</svg>
+
+<a href="#conteudo" class="skip">pular para o conteúdo</a>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="Maré">
+      <img src="assets/icon.png" alt="" />
+      <span>maré</span>
+    </a>
+    <div class="nav-links">
+      <a href="#farol">o farol</a>
+      <a href="#funcoes">funções</a>
+      <a href="#privacidade">privacidade</a>
+      <a href="#planos">planos</a>
+      <a href="https://apps.apple.com/br/app/id6773973582" target="_blank" rel="noopener" class="nav-cta">baixar grátis</a>
+    </div>
+  </div>
+</nav>
+
+<a id="top"></a>
+<main id="conteudo">
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow reveal">pra largar pornografia, scroll ou álcool</span>
+      <h1 class="reveal d1">largue o vício,<br/><span class="l2 grad">um dia de cada vez.</span></h1>
+      <p class="sub reveal d2">o Maré te ajuda a sair do ciclo que tá te consumindo, no seu tempo e <b>sem julgamento</b>. um coach que te escuta quando aperta, seus dias limpos que se somam mesmo quando você cai, e o seu porquê sempre por perto.</p>
+      <div class="cta-row reveal d3">
+        <a class="btn btn-app" href="https://apps.apple.com/br/app/id6773973582" target="_blank" rel="noopener">
+          <svg class="apple" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.6zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          <span class="tcol"><small>baixar na</small><b>App Store</b></span>
+        </a>
+        <span class="btn btn-soon" role="note" aria-disabled="true" title="versão Android em breve">
+          <svg class="android" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.7l1.3-2a.35.35 0 0 0-.58-.38l-1.35 2.02a7 7 0 0 0-7.18 0L7.45 3.32a.35.35 0 1 0-.58.38l1.3 2A6 6 0 0 0 5.2 11h13.6a6 6 0 0 0-2.2-5.3zM9 9.1a.95.95 0 1 1 0-1.9.95.95 0 0 1 0 1.9zm6 0a.95.95 0 1 1 0-1.9.95.95 0 0 1 0 1.9z"/><path d="M5.3 12.1v6.5a1.3 1.3 0 0 0 1.3 1.3h10.8a1.3 1.3 0 0 0 1.3-1.3v-6.5z"/></svg>
+          <span class="tcol"><small>em breve no</small><b>Android</b></span>
+        </span>
+        <a class="btn btn-ghost" href="#farol">ver como funciona</a>
+      </div>
+      <div class="trust reveal d4">
+        <span>3 minutos</span><span class="dot"></span>
+        <span>sem login</span><span class="dot"></span>
+        <span>100% anônimo</span>
+      </div>
+    </div>
+
+    <div class="hero-stage reveal d2">
+      <div class="glow"></div>
+      <div class="phone-pair" id="pair">
+        <!-- back phone: âncora -->
+        <div class="phone back" style="--st:#0c0d1c" data-par="0.04">
+          <div class="island"></div>
+          <div class="screen">
+            <div class="statusbar"><span class="time">9:41</span><span class="sys">
+              <svg viewBox="0 0 18 12" aria-hidden="true"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1" opacity=".4"/></svg>
+              <svg viewBox="0 0 16 12" aria-hidden="true"><path d="M8 2.5c2.3 0 4.4.9 6 2.3l-1.5 1.6A6.6 6.6 0 0 0 8 5.6c-1.7 0-3.3.6-4.5 1.8L2 5.8A8.9 8.9 0 0 1 8 2.5zm0 4c1.2 0 2.3.5 3.1 1.2L8 11 4.9 7.7A4.6 4.6 0 0 1 8 6.5z"/></svg>
+              <svg viewBox="0 0 26 12" aria-hidden="true"><rect x="0.5" y="1" width="21" height="10" rx="2.6" fill="none" stroke="#fff" stroke-width="1" opacity=".5"/><rect x="2" y="2.5" width="16" height="7" rx="1.4"/><rect x="23" y="4" width="2" height="4" rx="1"/></svg>
+            </span></div>
+            <img src="assets/shots/ancora.jpg" alt="Tela da âncora, o porquê escrito pela pessoa no Maré" />
+          </div>
+        </div>
+        <!-- front phone: jornada -->
+        <div class="phone front" style="--st:#0a0d18" data-par="0.08">
+          <div class="island"></div>
+          <div class="screen">
+            <div class="statusbar"><span class="time">9:41</span><span class="sys">
+              <svg viewBox="0 0 18 12" aria-hidden="true"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+              <svg viewBox="0 0 16 12" aria-hidden="true"><path d="M8 2.5c2.3 0 4.4.9 6 2.3l-1.5 1.6A6.6 6.6 0 0 0 8 5.6c-1.7 0-3.3.6-4.5 1.8L2 5.8A8.9 8.9 0 0 1 8 2.5zm0 4c1.2 0 2.3.5 3.1 1.2L8 11 4.9 7.7A4.6 4.6 0 0 1 8 6.5z"/></svg>
+              <svg viewBox="0 0 26 12" aria-hidden="true"><rect x="0.5" y="1" width="21" height="10" rx="2.6" fill="none" stroke="#fff" stroke-width="1" opacity=".5"/><rect x="2" y="2.5" width="16" height="7" rx="1.4"/><rect x="23" y="4" width="2" height="4" rx="1"/></svg>
+            </span></div>
+            <img src="assets/shots/jornada.png" alt="Tela da jornada do Maré com zonas e recompensas" fetchpriority="high" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- trust strip -->
+  <div class="marq reveal">
+    <div class="wrap">
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg><span><b>100% anônimo</b></span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M15 7a3 3 0 1 0-6 0M5 10h14l-1 11H6z"/></svg><span><b>sem login</b> nem conta</span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg><span><b>7 dias grátis</b></span></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M4 18c4-6 12-6 16 0M4 13c4-5 12-5 16 0"/></svg><span><b>recomeço</b> sem culpa</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== MANIFESTO ===================== -->
+<section class="manifesto">
+  <div class="wrap">
+    <span class="eyebrow reveal" style="display:inline-flex">por que o Maré funciona</span>
+    <p class="big reveal d1">todo recomeço tem <span class="grad">altos e baixos.</span></p>
+    <p class="reveal d2">tem dia bom e tem dia que você cai. o Maré foi feito pra esse vai e vem. ele te dá ferramenta pra atravessar a vontade, conta cada dia que você segura e te recebe de volta quando você tropeça, sem sermão.</p>
+    <div class="cyc reveal d3">
+      <span>cai</span><span class="arr">→</span>
+      <span>levanta</span><span class="arr">→</span>
+      <span>aprende</span><span class="arr">→</span>
+      <span>segue</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURE: O FAROL ===================== -->
+<section class="feat" id="farol">
+  <div class="wrap">
+    <div class="ftext reveal">
+      <span class="eyebrow">o faroleiro</span>
+      <h2>um <span class="grad">farol</span> que te ouve<br/>quando aperta.</h2>
+      <p class="lead">um coach de verdade no seu bolso, por mensagem, a qualquer hora do dia ou da noite. ele entende o momento difícil e te ajuda a passar pela próxima hora sem agir no impulso.</p>
+      <ul class="flist">
+        <li><svg viewBox="0 0 24 24" stroke="#2dd4d8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span><b>desabafa a qualquer hora.</b> sem marcar horário e sem precisar se explicar.</span></li>
+        <li><svg viewBox="0 0 24 24" stroke="#7c5cff"><path d="M12 2a7 7 0 0 1 7 7c0 3-2 5-2 7H7c0-2-2-4-2-7a7 7 0 0 1 7-7z"/><path d="M9 21h6"/></svg><span><b>conversa que acolhe.</b> nada de sermão, nada de placar de vergonha.</span></li>
+        <li><svg viewBox="0 0 24 24" stroke="#ff8a5c"><path d="M12 22s-8-4.5-8-11a8 8 0 0 1 16 0c0 6.5-8 11-8 11z"/><circle cx="12" cy="11" r="2.5"/></svg><span><b>em crise, te conecta ao CVV (188).</b> porque a sua vida vem antes do app.</span></li>
+      </ul>
+    </div>
+    <div class="fmedia reveal d2">
+      <div class="glow"></div>
+      <div class="phone" style="--st:#0b0b12">
+        <div class="island"></div>
+        <div class="screen">
+          <div class="statusbar"><span class="time">9:41</span><span class="sys">
+            <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+            <svg viewBox="0 0 16 12"><path d="M8 2.5c2.3 0 4.4.9 6 2.3l-1.5 1.6A6.6 6.6 0 0 0 8 5.6c-1.7 0-3.3.6-4.5 1.8L2 5.8A8.9 8.9 0 0 1 8 2.5zm0 4c1.2 0 2.3.5 3.1 1.2L8 11 4.9 7.7A4.6 4.6 0 0 1 8 6.5z"/></svg>
+            <svg viewBox="0 0 26 12"><rect x="0.5" y="1" width="21" height="10" rx="2.6" fill="none" stroke="#fff" stroke-width="1" opacity=".5"/><rect x="2" y="2.5" width="16" height="7" rx="1.4"/><rect x="23" y="4" width="2" height="4" rx="1"/></svg>
+          </span></div>
+          <img src="assets/shots/faroleiro.png" alt="Conversa real com o Faroleiro no app Maré" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURE: SUAS MARÉS / JORNADA ===================== -->
+<section class="feat rev" id="jornada">
+  <div class="wrap">
+    <div class="ftext reveal">
+      <span class="eyebrow">as marés</span>
+      <h2>cada maré limpa <span class="grad">fica.</span><br/>mesmo quando você cai.</h2>
+      <p class="lead">o Maré conta os seus dias limpos e eles vão se somando. se você cai, perde aquele dia, mas todo o resto do seu progresso continua ali. aqui ninguém volta pro zero por causa de uma recaída.</p>
+      <div class="vquote">
+        <p class="hand">o seu progresso não some quando você tropeça.</p>
+      </div>
+    </div>
+    <div class="fmedia reveal d2">
+      <div class="glow" style="background:radial-gradient(circle at 50% 40%,rgba(45,212,216,.4),transparent 62%)"></div>
+      <div class="phone" style="--st:#0a0d18">
+        <div class="island"></div>
+        <div class="screen">
+          <div class="statusbar"><span class="time">9:41</span><span class="sys">
+            <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+            <svg viewBox="0 0 16 12"><path d="M8 2.5c2.3 0 4.4.9 6 2.3l-1.5 1.6A6.6 6.6 0 0 0 8 5.6c-1.7 0-3.3.6-4.5 1.8L2 5.8A8.9 8.9 0 0 1 8 2.5zm0 4c1.2 0 2.3.5 3.1 1.2L8 11 4.9 7.7A4.6 4.6 0 0 1 8 6.5z"/></svg>
+            <svg viewBox="0 0 26 12"><rect x="0.5" y="1" width="21" height="10" rx="2.6" fill="none" stroke="#fff" stroke-width="1" opacity=".5"/><rect x="2" y="2.5" width="16" height="7" rx="1.4"/><rect x="23" y="4" width="2" height="4" rx="1"/></svg>
+          </span></div>
+          <img src="assets/shots/jornada.png" alt="Tela da jornada com zonas sunlit e twilight no Maré" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURE: A ÂNCORA ===================== -->
+<section class="feat" id="ancora">
+  <div class="wrap">
+    <div class="ftext reveal">
+      <span class="eyebrow">a âncora</span>
+      <h2>uma <span class="grad">âncora</span><br/>pro seu porquê.</h2>
+      <p class="lead">você escreve, com as suas próprias palavras, o motivo real de querer parar. quando a vontade aperta, o Maré coloca esse lembrete bem na sua frente. é a sua voz te puxando de volta.</p>
+      <ul class="flist">
+        <li><svg viewBox="0 0 24 24" stroke="#b39dff"><path d="M12 2v7M12 22a8 8 0 0 0 8-8h-3M12 22a8 8 0 0 1-8-8h3"/><circle cx="12" cy="6" r="3"/></svg><span><b>escrita por você.</b> com as suas palavras, sem frase pronta.</span></li>
+        <li><svg viewBox="0 0 24 24" stroke="#2dd4d8"><path d="M12 22s-8-4.5-8-11a8 8 0 0 1 16 0c0 6.5-8 11-8 11z"/><circle cx="12" cy="11" r="2.5"/></svg><span><b>volta na hora certa.</b> aparece bem quando a vontade aperta.</span></li>
+        <li><svg viewBox="0 0 24 24" stroke="#6dd49d"><path d="M20 6L9 17l-5-5"/></svg><span><b>muda quando quiser.</b> do jeito que fizer sentido pra você.</span></li>
+      </ul>
+    </div>
+    <div class="fmedia reveal d2">
+      <div class="glow" style="background:radial-gradient(circle at 50% 40%,rgba(124,92,255,.45),transparent 62%)"></div>
+      <div class="phone" style="--st:#0c0d1c">
+        <div class="island"></div>
+        <div class="screen">
+          <div class="statusbar"><span class="time">9:41</span><span class="sys">
+            <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+            <svg viewBox="0 0 16 12"><path d="M8 2.5c2.3 0 4.4.9 6 2.3l-1.5 1.6A6.6 6.6 0 0 0 8 5.6c-1.7 0-3.3.6-4.5 1.8L2 5.8A8.9 8.9 0 0 1 8 2.5zm0 4c1.2 0 2.3.5 3.1 1.2L8 11 4.9 7.7A4.6 4.6 0 0 1 8 6.5z"/></svg>
+            <svg viewBox="0 0 26 12"><rect x="0.5" y="1" width="21" height="10" rx="2.6" fill="none" stroke="#fff" stroke-width="1" opacity=".5"/><rect x="2" y="2.5" width="16" height="7" rx="1.4"/><rect x="23" y="4" width="2" height="4" rx="1"/></svg>
+          </span></div>
+          <img src="assets/shots/ancora.jpg" alt="Tela da âncora, o porquê escrito pelo usuário no Maré" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FUNCTIONS GRID ===================== -->
+<section class="funcs" id="funcoes">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow reveal" style="display:inline-flex">tudo num app só</span>
+      <h2 class="reveal d1">o que o Maré <span class="grad">faz por você.</span></h2>
+      <p class="sub reveal d2">as ferramentas que te seguram no dia difícil e mostram o quanto você já caminhou.</p>
+    </div>
+    <div class="fgrid">
+      <div class="fcard reveal d1">
+        <div class="ic"><svg viewBox="0 0 24 24" stroke="#2dd4d8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>o farol</h3><p>um coach por mensagem que te escuta a qualquer hora e te ajuda a atravessar a vontade.</p>
+      </div>
+      <div class="fcard reveal d2">
+        <div class="ic"><svg viewBox="0 0 24 24" stroke="#4d8fff"><path d="M2 15c3-4 6-4 9 0s7 4 11 0M2 9c3-4 6-4 9 0s7 4 11 0"/></svg></div>
+        <h3>suas marés</h3><p>seus dias limpos contados sem punição. se você cai, o que já conquistou continua lá.</p>
+      </div>
+      <div class="fcard reveal d3">
+        <div class="ic"><svg viewBox="0 0 24 24" stroke="#7c5cff"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/><path d="M5 5l3.6 3.6M19 5l-3.6 3.6M5 19l3.6-3.6M19 19l-3.6-3.6"/></svg></div>
+        <h3>surfar a onda</h3><p>um exercício guiado pra atravessar a vontade sem ceder, com botão de SOS sempre à mão.</p>
+      </div>
+      <div class="fcard reveal d1">
+        <div class="ic"><svg viewBox="0 0 24 24" stroke="#6dd49d"><circle cx="12" cy="5" r="2.5"/><path d="M12 7.5V21M5 13a7 7 0 0 0 14 0M5 13H3m16 0h2"/></svg></div>
+        <h3>a âncora</h3><p>o seu porquê, escrito por você, de volta na sua frente bem na hora que aperta.</p>
+      </div>
+      <div class="fcard reveal d2">
+        <div class="ic"><svg viewBox="0 0 24 24" stroke="#ff8a5c"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+        <h3>mapa do gatilho</h3><p>você marca onde e quando a vontade costuma vir, e o app fica de olho junto com você.</p>
+      </div>
+      <div class="fcard reveal d3">
+        <div class="ic"><svg viewBox="0 0 24 24" stroke="#e9b665"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 16l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/></svg></div>
+        <h3>marcos</h3><p>cada conquista comemorada, de 1 dia a 1 ano, com uma palavra do farol.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRIVACY ===================== -->
+<section class="privacy" id="privacidade">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow reveal" style="display:inline-flex">privacidade de verdade</span>
+      <h2 class="reveal d1">o que é seu <em class="grad">fica só seu.</em></h2>
+      <p class="sub reveal d2">nada de conta, e-mail ou anúncio. o seu diário, as suas marés e a sua âncora ficam guardados só no seu iPhone. quando quiser, você apaga tudo num toque.</p>
+    </div>
+    <div class="pgrid">
+      <div class="pcard reveal d1">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M15 7a3 3 0 1 0-6 0M5 10h14l-1 11H6z"/></svg></div>
+        <h3>sem login</h3><p>nada de cadastro. abre e começa em 3 minutos.</p>
+      </div>
+      <div class="pcard reveal d2">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 7c0-1 4-3 8-3s8 2 8 3-4 3-8 3-8-2-8-3z"/><path d="M4 7v10c0 1 4 3 8 3s8-2 8-3V7"/><path d="M2 13l3-2M22 13l-3-2"/></svg></div>
+        <h3>seu diário fica no aparelho</h3><p>marés, âncora e gatilhos moram só no seu device. o farol responde sem te identificar.</p>
+      </div>
+      <div class="pcard reveal d3">
+        <div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+        <h3>face id</h3><p>tranca o app com seu rosto. só você entra.</p>
+      </div>
+      <div class="pcard reveal d4">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/><path d="M10 11v5M14 11v5"/></svg></div>
+        <h3>apagar é um botão</h3><p>mudou de ideia? leva tudo embora num toque.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STEPS ===================== -->
+<section class="steps">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow reveal" style="display:inline-flex">como começa</span>
+      <h2 class="reveal d1">do <span class="grad">vício</span> pro recomeço,<br/>em 3 minutos.</h2>
+    </div>
+    <div class="steps-grid">
+      <div>
+        <div class="step reveal d1">
+          <div class="n">1</div>
+          <div><h3>diz o que te puxa</h3><p>escolhe o que quer largar: pornografia, scroll, álcool, vape ou açúcar. dá pra mudar quando quiser.</p></div>
+        </div>
+        <div class="step reveal d2">
+          <div class="n">2</div>
+          <div><h3>lança sua âncora</h3><p>escreve o motivo real de querer parar. é esse porquê que vai te segurar na hora difícil.</p></div>
+        </div>
+        <div class="step reveal d3">
+          <div class="n">3</div>
+          <div><h3>navega, um dia por vez</h3><p>o farol te ouve, as marés se acumulam, e cada marco vem com uma palavra de quem tá do seu lado.</p></div>
+        </div>
+      </div>
+      <div class="fmedia reveal d2">
+        <div class="glow" style="background:radial-gradient(circle at 50% 40%,rgba(75,143,255,.4),transparent 62%)"></div>
+        <div class="phone" style="--st:#0f0d1c">
+          <div class="island"></div>
+          <div class="screen">
+            <div class="statusbar"><span class="time">9:41</span><span class="sys">
+              <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+              <svg viewBox="0 0 16 12"><path d="M8 2.5c2.3 0 4.4.9 6 2.3l-1.5 1.6A6.6 6.6 0 0 0 8 5.6c-1.7 0-3.3.6-4.5 1.8L2 5.8A8.9 8.9 0 0 1 8 2.5zm0 4c1.2 0 2.3.5 3.1 1.2L8 11 4.9 7.7A4.6 4.6 0 0 1 8 6.5z"/></svg>
+              <svg viewBox="0 0 26 12"><rect x="0.5" y="1" width="21" height="10" rx="2.6" fill="none" stroke="#fff" stroke-width="1" opacity=".5"/><rect x="2" y="2.5" width="16" height="7" rx="1.4"/><rect x="23" y="4" width="2" height="4" rx="1"/></svg>
+            </span></div>
+            <img src="assets/shots/largar.png" alt="Onboarding do Maré: o que você quer largar" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MILESTONES ===================== -->
+<section class="miles">
+  <div class="wrap">
+    <span class="eyebrow reveal" style="display:inline-flex">marcos celebrados</span>
+    <h2 class="reveal d1">cada conquista <span class="grad">é comemorada.</span></h2>
+    <p class="reveal d2">de 1 dia a 1 ano, cada marco vem com uma palavra do farol e mostra o quanto você já caminhou.</p>
+    <div class="mtrack reveal d2">
+      <div class="mline"></div>
+      <div class="mdots">
+        <div class="mdot"><span class="pt"></span><span class="lab"><b>1</b>dia</span></div>
+        <div class="mdot"><span class="pt"></span><span class="lab"><b>7</b>dias</span></div>
+        <div class="mdot"><span class="pt"></span><span class="lab"><b>30</b>dias</span></div>
+        <div class="mdot"><span class="pt"></span><span class="lab"><b>90</b>dias</span></div>
+        <div class="mdot"><span class="pt"></span><span class="lab"><b>180</b>dias</span></div>
+        <div class="mdot"><span class="pt"></span><span class="lab"><b>1</b>ano</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRICING ===================== -->
+<section class="pricing" id="planos">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow reveal" style="display:inline-flex">o começo</span>
+      <h2 class="reveal d1">experimente <span class="grad">antes de pagar.</span></h2>
+      <p class="sub reveal d2">Maré por inteiro, 7 dias grátis em todos os planos. a gente te avisa 2 dias antes de cobrar. sem login pra testar.</p>
+    </div>
+    <div class="plans">
+      <div class="plan reveal d1">
+        <div class="pname">mensal</div>
+        <div class="price">R$19<small>,90</small></div>
+        <div class="per">por mês · cancela quando quiser</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>faroleiro ilimitado</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>todas as recompensas</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>7 dias grátis</li>
+        </ul>
+        <a class="pcta" href="https://apps.apple.com/br/app/id6773973582" target="_blank" rel="noopener">começar grátis</a>
+      </div>
+
+      <div class="plan best reveal d2">
+        <span class="badge">melhor · economize 58%</span>
+        <div class="pname">anual</div>
+        <div class="price">R$99<small>,90</small></div>
+        <div class="per"><b>R$8,32/mês</b> · cobrado uma vez por ano</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>tudo do mensal</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>ícone disfarçado (calculadora/notas)</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>suporte direto</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>7 dias grátis</li>
+        </ul>
+        <a class="pcta" href="https://apps.apple.com/br/app/id6773973582" target="_blank" rel="noopener">começar grátis</a>
+      </div>
+
+      <div class="plan reveal d3">
+        <div class="pname">lifetime</div>
+        <div class="price">R$249<small>,90</small></div>
+        <div class="per">paga uma vez · é seu pra sempre</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>tudo, sem mensalidade</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>todas as atualizações</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>um pagamento, fim</li>
+        </ul>
+        <a class="pcta" href="https://apps.apple.com/br/app/id6773973582" target="_blank" rel="noopener">comprar acesso vitalício</a>
+      </div>
+    </div>
+    <p class="fineprint">o plano anual renova automaticamente pelo mesmo período. a cobrança ocorre na conta do iTunes até 24h antes do fim do ciclo. você pode cancelar a renovação até 24h antes nas Configurações da App Store. preços em reais (BR).</p>
+  </div>
+</section>
+
+<!-- ===================== SAFETY ===================== -->
+<section class="safety">
+  <div class="wrap reveal">
+    <div class="scard">
+      <div class="anchor"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><path d="M12 7.5V21M5 13a7 7 0 0 0 14 0M5 13H3m16 0h2"/></svg></div>
+      <div>
+        <h3>Você não precisa passar por isso sozinho.</h3>
+        <p>O Maré é uma ferramenta de apoio. <b>Ele não substitui terapia, atendimento médico ou tratamento profissional.</b> Se você está em crise emocional, fale com alguém agora. O CVV atende 24h, é gratuito e sigiloso.</p>
+        <span class="cvv">CVV · ligue <b>188</b> · 24 horas, gratuito</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="faq">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow reveal" style="display:inline-flex">ainda na dúvida?</span>
+      <h2 class="reveal d1">o que costumam perguntar.</h2>
+    </div>
+    <div class="reveal d1">
+      <div class="qa"><button aria-expanded="false" aria-controls="faq-1">é anônimo mesmo?<span class="ic" aria-hidden="true"></span></button>
+        <div class="ans" id="faq-1" role="region" aria-hidden="true"><p>é. não tem cadastro, e-mail nem conta, então nada que você faz fica ligado à sua identidade. seu diário, suas marés, sua âncora e seus gatilhos ficam só no seu iPhone e nunca sobem pra lugar nenhum. a única coisa que sai do aparelho são as mensagens pro faroleiro: pra gerar a resposta, elas passam por um servidor seguro e por um provedor de IA (a OpenAI), sempre sem login e sem te identificar. a gente não guarda essas conversas no nosso servidor, e o provedor não usa elas pra treinar modelo. dá pra trancar o app com Face ID e apagar tudo num botão.</p></div>
+      </div>
+      <div class="qa"><button aria-expanded="false" aria-controls="faq-2">funciona pra qualquer vício?<span class="ic" aria-hidden="true"></span></button>
+        <div class="ans" id="faq-2" role="region" aria-hidden="true"><p>o foco principal é o uso compulsivo de pornografia, mas as ferramentas (marés, âncora, surfar a onda e mapa do gatilho) funcionam pra outros comportamentos como scroll infinito, álcool, vape e açúcar. você escolhe o que quer largar no começo e pode ajustar depois.</p></div>
+      </div>
+      <div class="qa"><button aria-expanded="false" aria-controls="faq-3">e se eu recair?<span class="ic" aria-hidden="true"></span></button>
+        <div class="ans" id="faq-3" role="region" aria-hidden="true"><p>recaída faz parte do processo. aqui ela vira só um ponto no caminho, e o acumulado das suas marés limpas continua com você. o farol te recebe de volta sem sermão e você segue daqui.</p></div>
+      </div>
+      <div class="qa"><button aria-expanded="false" aria-controls="faq-4">preciso de cartão pra testar?<span class="ic" aria-hidden="true"></span></button>
+        <div class="ans" id="faq-4" role="region" aria-hidden="true"><p>não precisa de cartão pra começar. os 7 dias grátis valem pra todos os planos e a gente te avisa 2 dias antes de qualquer cobrança. você usa o Maré por inteiro nesses dias e decide com calma se quer continuar.</p></div>
+      </div>
+      <div class="qa"><button aria-expanded="false" aria-controls="faq-5">isso substitui terapia?<span class="ic" aria-hidden="true"></span></button>
+        <div class="ans" id="faq-5" role="region" aria-hidden="true"><p>não. o Maré é um apoio pro dia a dia, não um tratamento. ele caminha junto com terapia e atendimento profissional e, em momentos de crise, te encaminha pro CVV (188), que atende 24h, de graça.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="final">
+  <div class="glow"></div>
+  <div class="wrap">
+    <span class="eyebrow reveal" style="display:inline-flex">o seu recomeço começa agora</span>
+    <h2 class="reveal d1">largue o vício.<br/>começa <span class="grad">hoje.</span></h2>
+    <p class="reveal d2">você não tá sozinho nessa onda. baixa o Maré e dá o primeiro passo com 7 dias grátis e sem login.</p>
+    <div class="cta-row reveal d3">
+      <a class="btn btn-app" href="https://apps.apple.com/br/app/id6773973582" target="_blank" rel="noopener">
+        <svg class="apple" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.6zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        <span class="tcol"><small>baixar na</small><b>App Store</b></span>
+      </a>
+      <span class="btn btn-soon" role="note" aria-disabled="true" title="versão Android em breve">
+        <svg class="android" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.7l1.3-2a.35.35 0 0 0-.58-.38l-1.35 2.02a7 7 0 0 0-7.18 0L7.45 3.32a.35.35 0 1 0-.58.38l1.3 2A6 6 0 0 0 5.2 11h13.6a6 6 0 0 0-2.2-5.3zM9 9.1a.95.95 0 1 1 0-1.9.95.95 0 0 1 0 1.9zm6 0a.95.95 0 1 1 0-1.9.95.95 0 0 1 0 1.9z"/><path d="M5.3 12.1v6.5a1.3 1.3 0 0 0 1.3 1.3h10.8a1.3 1.3 0 0 0 1.3-1.3v-6.5z"/></svg>
+        <span class="tcol"><small>em breve no</small><b>Android</b></span>
+      </span>
+    </div>
+    <svg class="wave-big wdraw reveal" viewBox="0 0 520 40" fill="none" aria-hidden="true">
+      <path d="M2 20 C 60 2, 110 38, 170 20 S 280 2, 340 20 S 450 38, 518 20" stroke="url(#wg)" stroke-width="3" stroke-linecap="round" filter="url(#wglow)" pathLength="1"/>
+    </svg>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand"><img src="assets/icon.png" alt=""/><span>maré</span></a>
+        <p>o app que te ajuda a largar o vício e acompanhar o seu recomeço, um dia de cada vez.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="fcol">
+          <h4>o app</h4>
+          <a href="#farol">o farol</a>
+          <a href="#jornada">as marés</a>
+          <a href="#privacidade">privacidade</a>
+          <a href="#planos">planos</a>
+        </div>
+        <div class="fcol">
+          <h4>legal</h4>
+          <a href="https://josediogor.github.io/mare-legal/" target="_blank" rel="noopener">privacidade</a>
+          <a href="https://josediogor.github.io/mare-legal/" target="_blank" rel="noopener">termos</a>
+          <a href="https://josediogor.github.io/mare-legal/contato.html" target="_blank" rel="noopener">suporte</a>
+        </div>
+        <div class="fcol">
+          <h4>ajuda agora</h4>
+          <a href="tel:188">CVV · 188</a>
+          <a href="https://apps.apple.com/br/app/id6773973582" target="_blank" rel="noopener">baixar na App Store</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Maré</span>
+      <span class="made">largue o vício, um dia de cada vez 🌊</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // sticky nav
+  var nav=document.getElementById('nav');
+  var onScroll=function(){nav.classList.toggle('scrolled',window.scrollY>24);};
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  // reveal on scroll. debug params (v/y/probe) only run locally, never on the live domain
+  var DEV=location.hostname===''||/^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  var SHOWALL=DEV&&/[?&]v=1/.test(location.search);
+  if(DEV&&/[?&]probe=1/.test(location.search)){
+    window.addEventListener('load',function(){
+      var sels=['header.hero','.marq','.manifesto','#farol','#jornada','#ancora','#privacidade','.steps','.miles','#planos','.safety','.faq','.final','footer'];
+      var t='H'+document.body.scrollHeight+'|';
+      sels.forEach(function(s){var e=document.querySelector(s);if(e)t+=s+':'+Math.round(e.offsetTop)+'+'+Math.round(e.getBoundingClientRect().height)+' ';});
+      document.title=t;
+    });
+  }
+  var YM=DEV?location.search.match(/[?&]y=(\d+)/):null;
+  if(YM){document.documentElement.style.scrollBehavior='auto';
+    window.scrollTo(0,+YM[1]);
+    window.addEventListener('load',function(){window.scrollTo(0,+YM[1]);});}
+  if(SHOWALL){
+    document.querySelectorAll('.reveal,.wdraw').forEach(function(el){el.classList.add('in');});
+  }else{
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+    },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal,.wdraw').forEach(function(el){io.observe(el);});
+  }
+
+  // FAQ accordion
+  var qas=document.querySelectorAll('.qa');
+  qas.forEach(function(qa){
+    var btn=qa.querySelector('button'),ans=qa.querySelector('.ans');
+    btn.addEventListener('click',function(){
+      var open=qa.classList.toggle('open');
+      btn.setAttribute('aria-expanded',open);
+      ans.setAttribute('aria-hidden',!open);
+      ans.style.maxHeight=open?ans.scrollHeight+'px':null;
+    });
+  });
+  // keep open panels correctly sized on resize / orientation change
+  var rzt;
+  window.addEventListener('resize',function(){
+    clearTimeout(rzt);
+    rzt=setTimeout(function(){
+      qas.forEach(function(qa){
+        if(qa.classList.contains('open')){
+          var ans=qa.querySelector('.ans');ans.style.maxHeight=ans.scrollHeight+'px';
+        }
+      });
+    },150);
+  },{passive:true});
+
+  // subtle mouse parallax on the hero phone group (float anim stays on the phones themselves)
+  var pair=document.getElementById('pair');
+  if(pair&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches&&window.matchMedia('(pointer:fine)').matches){
+    var rx=0,ry=0,cxv=0,cyv=0,raf=0;
+    window.addEventListener('mousemove',function(ev){
+      var cx=window.innerWidth/2,cy=window.innerHeight/2;
+      rx=((ev.clientX-cx)/cx)*16; ry=((ev.clientY-cy)/cy)*16;
+      if(!raf)raf=requestAnimationFrame(tick);
+    },{passive:true});
+    function tick(){
+      cxv+=(rx-cxv)*0.08; cyv+=(ry-cyv)*0.08;
+      pair.style.transform='translate('+cxv.toFixed(2)+'px,'+cyv.toFixed(2)+'px)';
+      if(Math.abs(rx-cxv)>0.1||Math.abs(ry-cyv)>0.1){raf=requestAnimationFrame(tick);}else{raf=0;}
+    }
+  }
+})();
+</script>
+</body>
+</html>
