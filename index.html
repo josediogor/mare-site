@@ -7,6 +7,41 @@
 <meta name="description" content="O Maré te ajuda a largar pornografia, scroll ou álcool. Um coach que te escuta na hora difícil, seus dias limpos contados sem punição e o lembrete do seu porquê. Sem julgamento. 7 dias grátis." />
 <meta name="theme-color" content="#05070d" />
 
+<link rel="canonical" href="https://marevicio.com/" />
+<meta name="apple-itunes-app" content="app-id=6773973582" />
+
+<!-- Google Analytics 4 · Coco Studio (Maré) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KQQB4P8B76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KQQB4P8B76');
+
+  // funil Coco Studio: visita -> scroll -> clique na App Store
+  (function(){
+    var APP='mare';
+    document.addEventListener('click', function(e){
+      var a = e.target.closest ? e.target.closest('a[href*="apps.apple.com"]') : null;
+      if(!a) return;
+      var loc = a.getAttribute('data-goatcounter-click') || a.getAttribute('data-cta')
+              || (a.closest('section') && a.closest('section').id)
+              || (a.textContent||'').trim().slice(0,40) || 'sem-rotulo';
+      gtag('event','app_store_click',{app:APP, cta_location:loc, link_url:a.href});
+    }, true);
+    var marks=[25,50,75,90], hit={};
+    function onScroll(){
+      var d=document.documentElement, b=document.body||{};
+      var st=d.scrollTop||b.scrollTop||0;
+      var sh=(d.scrollHeight||b.scrollHeight||0)-d.clientHeight;
+      var p= sh>0 ? Math.round(st/sh*100) : 0;
+      for(var i=0;i<marks.length;i++){var m=marks[i]; if(p>=m && !hit[m]){hit[m]=1; gtag('event','scroll_depth',{app:APP, percent_scrolled:m});}}
+      if(hit[90]) window.removeEventListener('scroll', onScroll);
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+  })();
+</script>
+
 <!-- Open Graph · domínio: marevicio.com -->
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="pt_BR" />
@@ -30,6 +65,39 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Maré: Recomeço",
+  "alternateName": "Maré",
+  "operatingSystem": "iOS",
+  "applicationCategory": "HealthApplication",
+  "inLanguage": "pt-BR",
+  "description": "Maré é um app pra largar o vício um dia de cada vez: um coach que te escuta na hora difícil, seus dias limpos contados sem punição e o lembrete do seu porquê. Pornografia, scroll, álcool e mais. Sem julgamento.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
+  "author": { "@type": "Organization", "name": "Coco Studio", "url": "https://marevicio.com/" },
+  "publisher": { "@type": "Organization", "name": "Coco Studio" },
+  "screenshot": "https://marevicio.com/assets/shots/jornada.png",
+  "downloadUrl": "https://apps.apple.com/br/app/id6773973582",
+  "url": "https://apps.apple.com/br/app/id6773973582"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "É anônimo mesmo?", "acceptedAnswer": { "@type": "Answer", "text": "É. Não tem cadastro, e-mail nem conta — nada fica ligado à sua identidade. Seu diário, marés, âncora e gatilhos ficam só no seu iPhone. Dá pra trancar o app com Face ID e apagar tudo num botão." } },
+    { "@type": "Question", "name": "Funciona pra qualquer vício?", "acceptedAnswer": { "@type": "Answer", "text": "O foco principal é o uso compulsivo de pornografia, mas as ferramentas funcionam pra outros comportamentos como scroll infinito, álcool, vape e açúcar. Você escolhe o que quer largar e pode ajustar depois." } },
+    { "@type": "Question", "name": "E se eu recair?", "acceptedAnswer": { "@type": "Answer", "text": "Recaída faz parte do processo. Aqui ela vira só um ponto no caminho, e o acumulado das suas marés limpas continua com você. O farol te recebe de volta sem sermão." } },
+    { "@type": "Question", "name": "Preciso de cartão pra testar?", "acceptedAnswer": { "@type": "Answer", "text": "Não precisa de cartão pra começar. Os 7 dias grátis valem pra todos os planos e a gente te avisa 2 dias antes de qualquer cobrança." } },
+    { "@type": "Question", "name": "Isso substitui terapia?", "acceptedAnswer": { "@type": "Answer", "text": "Não. O Maré é um apoio pro dia a dia, não um tratamento. Ele caminha junto com terapia e atendimento profissional e, em crise, te encaminha pro CVV (188)." } }
+  ]
+}
+</script>
 
 <style>
 /* ============================================================
@@ -487,6 +555,12 @@ footer{border-top:1px solid var(--line);padding:60px 0 50px}
 @media(max-width:560px){
   .wrap{padding:0 18px}
   .hero{padding:120px 0 40px}
+  /* headline: scale down so "um dia de cada vez." fits narrow screens */
+  .hero h1{font-size:clamp(1.6rem,8vw,2.4rem)}
+  /* phones: shrink + tuck the back phone in so the pair stays inside the frame */
+  .hero-stage{height:430px;margin-top:6px}
+  .phone-pair .phone.front{width:224px}
+  .phone-pair .phone.back{width:152px;right:-50px;top:-26px}
   .pgrid{grid-template-columns:1fr 1fr;gap:12px}
   .pcard{padding:20px 16px}
   .mdot .lab{font-size:.62rem}
